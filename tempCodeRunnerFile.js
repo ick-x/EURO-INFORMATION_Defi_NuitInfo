@@ -1,1 +1,1 @@
-res
+function Game({ shake, nyan, animEnd }) {

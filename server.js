@@ -1,4 +1,4 @@
-const token = "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";
+const token = "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";
 
 import { Dalle } from "node-dalle2";
 
@@ -26,8 +26,7 @@ app.get("/complete", async (req, res) => {
   });
   const reponse = response.data.choices[0].text;
   res.send(reponse);
-  
-  const [src, setSrc] = useState("");
+
   const generateImage = async () => {
     const res = await openai.createImage({
       prompt: "a red apple",
