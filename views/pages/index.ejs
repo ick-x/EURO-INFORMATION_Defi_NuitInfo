@@ -22,7 +22,7 @@
       .corps {
         padding-top :15px;
         padding-bottom: 100vw;
-        font-family: Century Gothic, sans serif !important;
+        font-family: Century Gothic, sans serif;
         text-align: center;
         margin: 0 20%;
         background-color: white;
@@ -48,9 +48,16 @@
         <input class="inputButton" type="submit" />
       </form>
 
-      <p id="result"></p>
+      <p id="result"> </p>
 
-      <img src="/complete?src"/>
+      <h1>Générer une image</h1>
+      <form id="formulaireImg">
+        <input class="input" type="text" name="prompt" />
+        <br />
+        <input class="inputButton" type="submit" />
+      </form>
+
+      <img src="" id="img"/>
 
       <script>
         async function getPrompt(prompt) {
@@ -59,7 +66,13 @@
           document.getElementById("result").innerText = result;
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
+        async function getImage(prompt) {
+          const req = await fetch(`/image?prompt=${encodeURI(prompt)}`);
+          const result = await req.text();
+          document.getElementById("img").src = result;
+        }
+
+        document.addEventListener("DOMContentLoaded",  () => {
           const formulaire = document.getElementById("formulaire");
 
           formulaire.addEventListener("submit", (e) => {
@@ -67,7 +80,21 @@
             const prompt = document.querySelector(
               `#formulaire input[name="prompt"]`
             );
+
             getPrompt(prompt.value);
+          });
+        });
+        
+        document.addEventListener("DOMContentLoaded",  () => {
+          const formulaireImg = document.getElementById("formulaireImg");
+
+          formulaireImg.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const prompt = document.querySelector(
+              `#formulaireImg input[name="prompt"]`
+            );
+
+            getImage(prompt.value);
           });
         });
       </script>
