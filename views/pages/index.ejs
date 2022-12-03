@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <link href="./style.css" rel="stylesheet" />
+
     <title>Document</title>
   </head>
   <body>
     <style>
-
       body {
         margin: 0;
         padding: 0;
@@ -16,50 +17,61 @@
       }
 
       h1 {
-        margin-top : 0
+        margin: 2vw 0;
       }
 
       .corps {
-        padding-top :15px;
+        padding-top: 15px;
         padding-bottom: 100vw;
         font-family: Century Gothic, sans serif;
         text-align: center;
-        margin: 0 20%;
+        margin: 0 15%;
         background-color: white;
       }
       .input {
-        width: 80%;
+        width: 65%;
         height: 20px;
-        overflow-wrap: break-word;
+      }
+      input[type="text"] {
+        font-family: Century Gothic, sans serif;
+      }
+      input[type="submit"] {
+        font-family: Century Gothic, sans serif;
+        initial-value: "générer";
       }
       .inputButton {
-        margin-top: 2vw;
+        margin: 2vw 0;
       }
       #result {
         text-align: justify;
         margin: 0 5%;
-            }
+      }
     </style>
     <div class="corps">
-      <h1>Paul</h1>
+      <h1>Posez une question à Paul :</h1>
       <form id="formulaire">
-        <input class="input" type="text" name="prompt" />
+        <input id="PaulPrompt" class="input" type="text" name="prompt" />
         <br />
-        <input class="inputButton" type="submit" />
+        <input id="PaulBtn" class="inputButton" type="submit" />
       </form>
 
-      <p id="result"> </p>
+      <p id="result"></p>
 
       <h1>Générer une image</h1>
       <form id="formulaireImg">
-        <input class="input" type="text" name="prompt" />
+        <input id="ImgPrompt" class="input" type="text" name="prompt" />
         <br />
-        <input class="inputButton" type="submit" />
+        <input id="imgBtn" class="inputButton" type="submit" />
       </form>
 
-      <img src="" id="img"/>
+      <img src="" id="img" />
 
       <script>
+        document.getElementById("PaulBtn").value = "Ask to Paul";
+        document.getElementById("imgBtn").value = "Générer";
+        document.getElementById("PaulPrompt").value = "";
+        document.getElementById("ImgPrompt").value = "";
+
         async function getPrompt(prompt) {
           const req = await fetch(`/complete?prompt=${encodeURI(prompt)}`);
           const result = await req.text();
@@ -72,7 +84,7 @@
           document.getElementById("img").src = result;
         }
 
-        document.addEventListener("DOMContentLoaded",  () => {
+        document.addEventListener("DOMContentLoaded", () => {
           const formulaire = document.getElementById("formulaire");
 
           formulaire.addEventListener("submit", (e) => {
@@ -84,8 +96,8 @@
             getPrompt(prompt.value);
           });
         });
-        
-        document.addEventListener("DOMContentLoaded",  () => {
+
+        document.addEventListener("DOMContentLoaded", () => {
           const formulaireImg = document.getElementById("formulaireImg");
 
           formulaireImg.addEventListener("submit", (e) => {

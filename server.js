@@ -1,4 +1,4 @@
-const token = "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";
+const token = "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";
 
 import { Dalle } from "node-dalle2";
 
@@ -30,16 +30,15 @@ app.get("/complete", async (req, res) => {
 });
 
 app.get("/image", async (req, res) => {
-    console.log(req);
-    const response = await openai.createImage({
-      prompt: req.query.prompt,
-      n: 1,
-      size: "512x512",
-    });
+  console.log(req);
+  const response = await openai.createImage({
+    prompt: req.query.prompt,
+    n: 1,
+    size: "512x512",
+  });
 
-
-    const src = response.data.data[0].url;
-    res.send(src);
+  const src = response.data.data[0].url;
+  res.send(src);
 });
 
 app.listen(port, () => {
