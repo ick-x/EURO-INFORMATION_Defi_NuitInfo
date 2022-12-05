@@ -1,4 +1,4 @@
-const token = "your api token";
+const token = "your api token here";
 
 import { Dalle } from "node-dalle2";
 
