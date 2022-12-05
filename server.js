@@ -1,4 +1,4 @@
-const token = "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";
+const token = "your api token";
 
 import { Dalle } from "node-dalle2";
 
@@ -12,6 +12,7 @@ import express from "express";
 const app = express();
 const port = 3000;
 app.set("view engine", "ejs");
+app.use(express.static('public'));
 
 app.get("/", (req, res) => {
   res.render("pages/index");

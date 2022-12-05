@@ -1,0 +1,85 @@
+/* =============================================================================
+   My CSS
+   ========================================================================== */
+
+/* ---- base ---- */
+html,
+body {
+  margin: 0;
+  overflow: scroll;
+}
+
+/* ---- particles.js container ---- */
+
+#particles-js {
+  width: 100%;
+  height: 350vh;
+  background-color: #080808;
+  background-image: url("");
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* my css */
+
+.corps {
+  position: absolute;
+  color: rgb(255, 255, 255);
+  font-family: Century Gothic, sans serif;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+}
+h1 {
+  padding: 5% 0;
+  width: 80%;
+  margin-left: 10%;
+}
+.input {
+  height: 20px;
+}
+input {
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0);
+}
+input[type="text"] {
+  font-family: Century Gothic, sans serif;
+  width: 40vw;
+  border-radius: 3px;
+}
+
+input[type="text"]:focus-visible {
+  outline: 3px solid rgb(61, 61, 61);
+  background-color: rgba(0, 0, 0, 0.75);
+}
+input[type="submit"] {
+  width: 100px;
+  height: 40px;
+  font-family: Century Gothic, sans serif;
+  font-size: 15px;
+  margin: 5% 0;
+  border-radius: 3px;
+}
+
+input[type="submit"]:focus-visible {
+  outline: 3px solid rgb(61, 61, 61);
+  background-color: #ffffffee;
+  color: rgb(0, 0, 0);
+}
+.inputButton {
+  margin: 2vw 0;
+}
+#result {
+  text-align: justify;
+  font-size: 16px;
+}
+
+img {
+  border-radius: 5px;
+}

@@ -4,112 +4,83 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
-    <link href="./style.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
 
     <title>Document</title>
   </head>
   <body>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background: rgb(222, 222, 222);
-      }
+    <!-- particles.js container -->
+    <div id="particles-js">
+      <div class="corps">
+        <div class="container">
+          <h1>Posez une question à Paul :</h1>
+          <form id="formulaire">
+            <input id="PaulPrompt" class="input" type="text" name="prompt" />
+            <br />
+            <input id="PaulBtn" class="inputButton" type="submit" />
+          </form>
+          <p id="result"></p>
+        </div>
 
-      h1 {
-        margin: 2vw 0;
-      }
+        <div class="container">
+          <h1>Générer une image à partir d'une phrase :</h1>
+          <form id="formulaireImg">
+            <input id="ImgPrompt" class="input" type="text" name="prompt" />
+            <br />
+            <input id="imgBtn" class="inputButton" type="submit" />
+          </form>
+          <img src="" id="img" />
+        </div>
 
-      .corps {
-        padding-top: 15px;
-        padding-bottom: 100vw;
-        font-family: Century Gothic, sans serif;
-        text-align: center;
-        margin: 0 15%;
-        background-color: white;
-      }
-      .input {
-        width: 65%;
-        height: 20px;
-      }
-      input[type="text"] {
-        font-family: Century Gothic, sans serif;
-      }
-      input[type="submit"] {
-        font-family: Century Gothic, sans serif;
-        initial-value: "générer";
-      }
-      .inputButton {
-        margin: 2vw 0;
-      }
-      #result {
-        text-align: justify;
-        margin: 0 5%;
-      }
-    </style>
-    <div class="corps">
-      <h1>Posez une question à Paul :</h1>
-      <form id="formulaire">
-        <input id="PaulPrompt" class="input" type="text" name="prompt" />
-        <br />
-        <input id="PaulBtn" class="inputButton" type="submit" />
-      </form>
+        <script>
+          document.getElementById("PaulBtn").value = "Demander";
+          document.getElementById("imgBtn").value = "Générer";
+          document.getElementById("PaulPrompt").value = "";
+          document.getElementById("ImgPrompt").value = "";
 
-      <p id="result"></p>
+          async function getPrompt(prompt) {
+            const req = await fetch(`/complete?prompt=${encodeURI(prompt)}`);
+            const result = await req.text();
+            document.getElementById("result").innerText = result;
+          }
 
-      <h1>Générer une image</h1>
-      <form id="formulaireImg">
-        <input id="ImgPrompt" class="input" type="text" name="prompt" />
-        <br />
-        <input id="imgBtn" class="inputButton" type="submit" />
-      </form>
+          async function getImage(prompt) {
+            const req = await fetch(`/image?prompt=${encodeURI(prompt)}`);
+            const result = await req.text();
+            document.getElementById("img").src = result;
+          }
 
-      <img src="" id="img" />
+          document.addEventListener("DOMContentLoaded", () => {
+            const formulaire = document.getElementById("formulaire");
 
-      <script>
-        document.getElementById("PaulBtn").value = "Ask to Paul";
-        document.getElementById("imgBtn").value = "Générer";
-        document.getElementById("PaulPrompt").value = "";
-        document.getElementById("ImgPrompt").value = "";
+            formulaire.addEventListener("submit", (e) => {
+              e.preventDefault();
+              const prompt = document.querySelector(
+                `#formulaire input[name="prompt"]`
+              );
 
-        async function getPrompt(prompt) {
-          const req = await fetch(`/complete?prompt=${encodeURI(prompt)}`);
-          const result = await req.text();
-          document.getElementById("result").innerText = result;
-        }
-
-        async function getImage(prompt) {
-          const req = await fetch(`/image?prompt=${encodeURI(prompt)}`);
-          const result = await req.text();
-          document.getElementById("img").src = result;
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-          const formulaire = document.getElementById("formulaire");
-
-          formulaire.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const prompt = document.querySelector(
-              `#formulaire input[name="prompt"]`
-            );
-
-            getPrompt(prompt.value);
+              getPrompt(prompt.value);
+            });
           });
-        });
 
-        document.addEventListener("DOMContentLoaded", () => {
-          const formulaireImg = document.getElementById("formulaireImg");
+          document.addEventListener("DOMContentLoaded", () => {
+            const formulaireImg = document.getElementById("formulaireImg");
 
-          formulaireImg.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const prompt = document.querySelector(
-              `#formulaireImg input[name="prompt"]`
-            );
+            formulaireImg.addEventListener("submit", (e) => {
+              e.preventDefault();
+              const prompt = document.querySelector(
+                `#formulaireImg input[name="prompt"]`
+              );
 
-            getImage(prompt.value);
+              getImage(prompt.value);
+            });
           });
-        });
-      </script>
+        </script>
+      </div>
     </div>
+
+    <!-- scripts -->
+    <script src="../particles.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
